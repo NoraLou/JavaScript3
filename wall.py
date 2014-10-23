@@ -1,14 +1,16 @@
 import json
-
+ 
 from flask import Flask, request, render_template, make_response, redirect
 
 from api import wall_list, wall_add, wall_error, clear_messages
+
+from HTMLParser import HTMLParser
 
 
 app = Flask(__name__)
 
 # The "secret key" is needed for the Flask session machinery. In a real
-# application, this should be a unguessable string and should NOT be
+# application, this should be a unguessable string and should NOT bew
 # checked into version control. Typically, one stores this as an
 # environmental variable outside of the Flask app and gets it with
 # os.environ['MY_SECRET_KEY']. For our exercise purposes, though, it's

@@ -17,29 +17,36 @@ function handleFormSubmit(evt) {
     var textArea = $("#message");
     var msg = textArea.val();
 
-    // if($("#message-form").prop("disabled"))
-    //     {  do nothing }
-    // else
-    //     $("#message-form").prop("disabled", true)
-    //     setTimeout(function(){
-    //         $("#message-form").prop("disabled", false)
-    //     }, 5000)
-    // setTimeout(function () {
-    //     alert("please wait a moment before your next msg")
-    //     }, 2000);
+    function checkText(msg){
+        for(var i = 0; i<msg.length; i++){
+           console.log("are you getting here?");
+           if(msg[i] === "<" | ">" ){
+                msg = "";
+                alert("no special characters please");
+                break;
+           }
+        }
+    }
+
+    $("#message-send").prop("disabled",true);
+    setTimeout(function(){
+        //alert("please wait one moment to submit");
+        $("#message-send").prop("disabled",false);
+        }, 2000);
 
     console.log("handleFormSubmit: ", msg);
     addMessage(msg);
 
     // Reset the message container to be empty
     textArea.val("");
-    
-    
+       
 }
+
+$("#message-form").prop("disabled", true);
 
 function handleClearButton(evt) {
     evt.preventDefault();
-    console.log("clicked on reset button")
+    console.log("clicked on reset button");
     $.post(
         "/api/wall/reset",
         {},
@@ -52,7 +59,7 @@ function handleClearButton(evt) {
                 loadmessages();
             }
          }
-        )
+        );
 }
 
 /**
